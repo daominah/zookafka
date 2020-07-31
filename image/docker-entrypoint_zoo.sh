@@ -1,6 +1,20 @@
 #!/bin/bash
 
-# Cloned from https://github.com/31z4/zookeeper-docker/tree/c0039669a527a56b19ceb30a6523ed206fbf245d/3.5.7
+# Cloned from https://github.com/31z4/zookeeper-docker/tree/95e63be6a0767ed462db2e5aa779047672cc3b35/3.5.8
+
+# default config in base Zookeeper Dockerfile
+#ENV ZOO_CONF_DIR=/conf \
+#    ZOO_DATA_DIR=/data \
+#    ZOO_DATA_LOG_DIR=/datalog \
+#    ZOO_LOG_DIR=/logs \
+#    ZOO_TICK_TIME=2000 \
+#    ZOO_INIT_LIMIT=5 \
+#    ZOO_SYNC_LIMIT=2 \
+#    ZOO_AUTOPURGE_PURGEINTERVAL=0 \
+#    ZOO_AUTOPURGE_SNAPRETAINCOUNT=3 \
+#    ZOO_MAX_CLIENT_CNXNS=60 \
+#    ZOO_STANDALONE_ENABLED=true \
+#    ZOO_ADMINSERVER_ENABLED=true
 
 set -e
 
@@ -39,6 +53,9 @@ if [[ ! -f "$ZOO_CONF_DIR/zoo.cfg" ]]; then
         echo "4lw.commands.whitelist=$ZOO_4LW_COMMANDS_WHITELIST" >> "$CONFIG"
     fi
 
+    for cfg_extra_entry in $ZOO_CFG_EXTRA; do
+        echo "$cfg_extra_entry" >> "$CONFIG"
+    done
 fi
 
 # Write myid only if it doesn't exist

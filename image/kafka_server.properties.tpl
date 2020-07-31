@@ -1,3 +1,5 @@
+# My config base on https://kafka.apache.org/documentation/#prodconfig
+
 # see kafka.server.KafkaConfig for additional details and defaults
 
 ############################# Server Basics #############################
@@ -14,6 +16,7 @@ broker.id=${KAFKA_BROKER_ID}
 #   EXAMPLE:
 #     listeners = PLAINTEXT://your.host.name:9092
 #listeners=PLAINTEXT://:9092
+listeners=${KAFKA_LISTENERS}
 
 # Hostname and port the broker will advertise to producers and consumers. If not set,
 # it uses the value for "listeners" if configured.  Otherwise, it will use the value
@@ -48,7 +51,7 @@ log.dirs=/tmp/kafka-logs
 # The default number of log partitions per topic. More partitions allow greater
 # parallelism for consumption, but this will also result in more files across
 # the brokers.
-num.partitions=3
+num.partitions=${KAFKA_NUM_PARTITIONS}
 
 # The number of threads per data directory to be used for log recovery at startup and flushing at shutdown.
 # This value is recommended to be increased for installations with data dirs located in RAID array.
@@ -59,7 +62,11 @@ num.recovery.threads.per.data.dir=1
 # For anything other than development testing, a value greater than 1 is recommended to ensure availability such as 3.
 offsets.topic.replication.factor=3
 transaction.state.log.replication.factor=3
-transaction.state.log.min.isr=3
+transaction.state.log.min.isr=2
+
+# default replication factors for automatically created topics
+default.replication.factor=3
+min.insync.replicas=2
 
 ############################# Log Flush Policy #############################
 
