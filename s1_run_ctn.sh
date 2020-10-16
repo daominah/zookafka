@@ -52,18 +52,15 @@ for i in ${!nodeIDs[@]}; do
     export KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://${nodeIPs[i]}:9092
 
     # generate docker run environment file
-    dockerRunEnvList=${PWD}/env_docker_run.list
-    bash -x ${dockerRunEnvSh} 2>${dockerRunEnvList}
-    sed -i 's/+ //' ${dockerRunEnvList}
-    sed -i '/^export /d' ${dockerRunEnvList}
-    sed -i "s/'//g" ${dockerRunEnvList}
+    dkrEnv=${PWD}/env_docker_run.list; bash -x ./env.sh 2>${dkrEnv}
+    sed -i 's/+ //' ${dkrEnv}; sed -i '/^export /d' ${dkrEnv}; sed -i "s/'//g" ${dkrEnv}
 
     # pull image and run container image on remote host,
     # -p 2181:2181 -p 2888:2888 -p 3888:3888 -p 9092:9092 \
     eval $(docker-machine env ${machines[i]})
     docker run -dit --name ${dockerCtnName} \
         --network host \
-        --env-file ${dockerRunEnvList} \
+        --env-file ${dkrEnv} \
         ${DOCKER_IMG_TAG}
     eval $(docker-machine env --unset)
 done

@@ -60,13 +60,12 @@ num.recovery.threads.per.data.dir=1
 ############################# Internal Topic Settings  #############################
 # The replication factor for the group metadata internal topics "__consumer_offsets" and "__transaction_state"
 # For anything other than development testing, a value greater than 1 is recommended to ensure availability such as 3.
-offsets.topic.replication.factor=3
-transaction.state.log.replication.factor=3
-transaction.state.log.min.isr=2
 
 # default replication factors for automatically created topics
-default.replication.factor=3
-min.insync.replicas=2
+
+default.replication.factor=${KAFKA_DEFAULT_REPLICATION_FACTOR}
+offsets.topic.replication.factor=${KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR}
+min.insync.replicas=${KAFKA_MIN_INSYNC_REPLICAS}
 
 ############################# Log Flush Policy #############################
 
