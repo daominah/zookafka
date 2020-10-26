@@ -17,7 +17,7 @@ if ${isRemote}; then # create machines on remote nodes
 else # create machines on local virtual
     machineName=local
     for i in 0 1 2; do
-        docker-machine create --driver virtualbox --virtualbox-memory 1536 \
+        docker-machine create --driver virtualbox --virtualbox-memory 1024 \
             ${machineName}${i}
     done
     # print IP addresss of local machines

@@ -17,3 +17,7 @@ export KAFKA_NUM_PARTITIONS=3
 export KAFKA_DEFAULT_REPLICATION_FACTOR=2
 export KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR=2
 export KAFKA_MIN_INSYNC_REPLICAS=1
+
+# https://docs.confluent.io/current/kafka/deployment.html#jvm recomend Xmx=Xms,
+# https://stackoverflow.com/a/36649296/4097963
+export KAFKA_HEAP_OPTS="-Xmx6G -Xms511M"
