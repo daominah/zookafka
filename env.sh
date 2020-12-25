@@ -21,3 +21,4 @@ export KAFKA_MIN_INSYNC_REPLICAS=1
 # https://docs.confluent.io/current/kafka/deployment.html#jvm recomend Xmx=Xms,
 # https://stackoverflow.com/a/36649296/4097963
 export KAFKA_HEAP_OPTS="-Xmx6G -Xms511M"
+export KAFKA_MESSAGE_MAX_BYTES=15000000

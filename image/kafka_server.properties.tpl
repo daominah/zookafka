@@ -126,3 +126,6 @@ zookeeper.connection.timeout.ms=18000
 # We override this to 0 here as it makes for a better out-of-the-box experience for development and testing.
 # However, in production environments the default value of 3 seconds is more suitable as this will help to avoid unnecessary, and potentially expensive, rebalances during application startup.
 group.initial.rebalance.delay.ms=3000
+
+message.max.bytes=${KAFKA_MESSAGE_MAX_BYTES}
+replica.fetch.max.bytes=${KAFKA_MESSAGE_MAX_BYTES}
