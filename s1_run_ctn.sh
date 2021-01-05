@@ -52,7 +52,7 @@ for i in ${!nodeIDs[@]}; do
     export KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://${nodeIPs[i]}:9092
 
     # generate docker run environment file
-    dkrEnv=${PWD}/env_docker_run.list; bash -x ./env.sh 2>${dkrEnv}
+    dkrEnv=${PWD}/env_docker_run.list; bash -x ${dockerRunEnvSh} 2>${dkrEnv}
     sed -i 's/+ //' ${dkrEnv}; sed -i '/^export /d' ${dkrEnv}; sed -i "s/'//g" ${dkrEnv}
 
     # pull image and run container image on remote host,
