@@ -18,7 +18,7 @@ else # create machines on local virtual
     machineName=local
     for i in 0 1 2; do
         docker-machine create --driver virtualbox \
-            --virtualbox-memory 1024 --virtualbox-disk-size 40000 \
+            --virtualbox-memory 1536 --virtualbox-disk-size 40000 \
             ${machineName}${i}
     done
     # print IP addresss of local machines

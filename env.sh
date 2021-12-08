@@ -1,19 +1,15 @@
-# Zookeeper config
-export ZOO_STANDALONE_ENABLED=false
-export ZOO_ADMINSERVER_ENABLED=false
-export ZOO_4LW_COMMANDS_WHITELIST=stat,ruok,envi # accepted commands from telnet
-export ZOO_MY_ID=${ZOO_MY_ID} # defined in s1
-export ZOO_SERVERS=${ZOO_SERVERS} # defined in s1
+# Kafka config, is used for  kafka_server.properties.tpl in docker-entrypoint
+# Example: kafka.apache.org/documentation/#prodconfig
+# Run Kafka without Zookeeper: github.com/apache/kafka/blob/trunk/config/kraft/README.md
 
-# Kafka config, is used for  kafka_server.properties.tpl in docker-entrypoint.
-# Example: https://kafka.apache.org/documentation/#prodconfig
-export KAFKA_ZOOKEEPER_CONNECT=${KAFKA_ZOOKEEPER_CONNECT} # defined in s1
-export KAFKA_BROKER_ID=${KAFKA_BROKER_ID} # defined in s1
+export KAFKA_BROKER_ID=${KAFKA_BROKER_ID} # defined in s1_run, example: 11, 22, 33
+# config "log.dirs" is "/kafka-logs" in container, mount to host dir if needed
+# config "zookeeper.connect"
+
 export KAFKA_LISTENERS=${KAFKA_LISTENERS} # defined in s1
 export KAFKA_ADVERTISED_LISTENERS=${KAFKA_ADVERTISED_LISTENERS} # defined in s1
 
 export KAFKA_NUM_PARTITIONS=3
-
 export KAFKA_DEFAULT_REPLICATION_FACTOR=2
 export KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR=2
 export KAFKA_MIN_INSYNC_REPLICAS=1
